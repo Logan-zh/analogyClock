@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height:100vh;
+            display:flex;
+            justify-content: center;
+        }
+        .clock{
+            width:300px;
+            height:300px;
+            border:5px solid black;
+            border-radius:50%;
+            position:relative;
+            margin-top:10%;
+            background:url('img/clock.gif');
+        }
+        .clock::before{
+            content:'';
+            width:110%;
+            height:110%;
+            position:absolute;
+            border:5px solid black;
+            border-radius:50%;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%);
+            background:#8a8;
+            z-index:-1;
+        }
+        .hour{
+            width:10px;
+            background:black;
+            height:20%;
+            top:30%;
+        }
+        .hour::before{
+            content:'';
+            width:20px;
+            height:20px;
+            background:black;
+            position: absolute;
+            border-radius:50%;
+            bottom:-10px;
+            left:-5px;
+            z-index:999;
+        }
+        .minu{
+            width:8px;
+            background:black;
+            height:35%;
+            top:15%;
+            margin-left:2px;
+        }
+        .seco{
+            width:6px;
+            background:black;
+            height:45%;
+            top:5%;
+            margin-left:2px;
+        }
+        .seco::before{
+            content:'';
+            width:6px;
+            height:10px;
+            background: red;
+            position:absolute;
+        }
+        .hour,.minu,.seco{
+            position:absolute;
+            left:50%;
+            transform:translateX(-50%);
+            transform-origin:50% 95%;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="hour"></div>
+        <div class="minu"></div>
+        <div class="seco"></div>
+    </div>
+    <script>
+        setInterval(()=>{
+        let time=new Date;
+        let h=time.getHours();
+        let m=time.getMinutes();
+        let s=time.getSeconds();
+        let ch=h*60*0.5;
+        let cm=m*60*0.1;
+        let cs=s*6;
+        document.querySelector('.hour').style.transform=`rotate(${ch}deg)`;
+        document.querySelector('.minu').style.transform=`rotate(${cm}deg)`;
+        document.querySelector('.seco').style.transform=`rotate(${cs}deg)`;
+        },1000);
+    </script>
+</body>
+</html>
